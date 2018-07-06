@@ -31,7 +31,7 @@
 <script src="./assets/scripts/d3-composite-projections.min.js"></script>
 <script>
 
-console.log(data);
+// console.log(data);
 
 var width = 960,
     height = 500;
@@ -58,9 +58,14 @@ d3.json("./assets/data/us_congressional_districts.json", function(error, us) {
         //   return "#4a86e8";
         // else
         //   return "#e84a4a";
-        let key =  + d.properties.CONG_DIST;
         // console.log(key);
-        return d.properties.STATE in data && d.properties.CONG_DIST in data[d.properties.STATE] && data[d.properties.STATE][d.properties.CONG_DIST]>0 ? '#ff69b4' : '#ccc';
+        return 
+          d.properties.STATE in data && 
+          d.properties.CONG_DIST in data[d.properties.STATE] && 
+          data[d.properties.STATE][d.properties.CONG_DIST]>0 ? 
+            '#ff69b4' : 
+            '#ccc'
+          ;
       })
       .style("stroke", "#000")
       .style("stroke-width", "0.5px")
