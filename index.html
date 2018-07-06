@@ -15,7 +15,7 @@
   font-size: 0.9em;
   font-weight: bold;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.55);
+  background-color: rgba(0, 0, 0, 0.25);
   opacity: 0;
   pointer-events: none;
   border-radius:5px;
@@ -33,8 +33,8 @@
 
 // console.log(data);
 
-var width = 960,
-    height = 500;
+var width = 1440,
+    height = 600;
 
 var projection = d3.geoAlbersUsaTerritories();
 var path = d3.geoPath()
@@ -59,15 +59,23 @@ d3.json("./assets/data/us_congressional_districts.json", function(error, us) {
         // else
         //   return "#e84a4a";
         // console.log(key);
-        return 
-          d.properties.STATE in data && 
-          d.properties.CONG_DIST in data[d.properties.STATE] && 
-          data[d.properties.STATE][d.properties.CONG_DIST]>0 ? 
-            '#ff69b4' : 
-            '#ccc'
-          ;
+        //experiment
+          if(d.properties.STATE in data && d.properties.CONG_DIST in data[d.properties.STATE] && data[d.properties.STATE][d.properties.CONG_DIST]>0)
+            return "#ffd800";
+          else
+            return "#1e1e1e";
+
+
+        //end experiment
+      //  return
+    //      d.properties.STATE in data &&
+  //        d.properties.CONG_DIST in data[d.properties.STATE] &&
+  //        data[d.properties.STATE][d.properties.CONG_DIST]>0 ?
+    //        '#ff69b4' :
+      //      '#ccc'
+        //  ;
       })
-      .style("stroke", "#000")
+      .style("stroke", "#fff")
       .style("stroke-width", "0.5px")
       .on("mouseover", function(d){
 
@@ -81,7 +89,7 @@ d3.json("./assets/data/us_congressional_districts.json", function(error, us) {
           .style("left", x + "px")
           .style("top", y + "px")
           .style("opacity", 1)
-          .html( d.properties.STATE + " dist: " + d.properties.CONG_DIST + "<br/>" +d.properties.CONG_REP + "<br/>" + d.properties.PARTY_AFF );
+          .html( d.properties.STATE + " dist: " + d.properties.CONG_DIST );
         })
         .on("mouseout", function(){
           //Hide the tooltip
